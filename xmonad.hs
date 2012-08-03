@@ -10,38 +10,39 @@ import XMonad.Prompt.Shell
 import XMonad.Prompt.Ssh
 import XMonad.Prompt.Theme
 import XMonad.Prompt.Window
+import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.NoBorders
 import System.IO
 import qualified Data.Map as M
 
 main = do
-
-  xmobar <- spawnPipe "xmobar"
-
-  let myConfig = baseConfig {
-    keys      = myKeys,
-    logHook   = myDynLog xmobar,
-
-    workspaces = ["home","mail","web","dev0","dev1","music", "var7","var8", "var9"],
-
-    manageHook = manageDocks <+> manageHook baseConfig,
-    layoutHook = avoidStruts  $  layoutHook baseConfig,
-    handleEventHook = handleEventHook baseConfig<+> docksEventHook,
-    modMask = mod4Mask
-    }
-
-  xmonad myConfig
+  myConfigWithBar <- statusBar "xmobar" myPP toggleStrutsKey myConfig
+  xmonad myConfigWithBar
 
   where
     baseConfig = defaultConfig
 
-    myDynLog h = dynamicLogWithPP defaultPP
+    myConfig = baseConfig {
+      keys      = myKeys,
+
+      workspaces = ["1-home","2-mail","3-web","4-dev","5-dev","6-var", "7-var","8-var", "9-music"],
+
+      manageHook =  composeAll [isFullscreen --> doFullFloat] <+> manageDocks <+> manageHook baseConfig,
+      layoutHook = smartBorders $ avoidStruts  $ layoutHook baseConfig,
+      handleEventHook = handleEventHook baseConfig<+> docksEventHook,
+      modMask = mod4Mask
+      }
+    
+    -- Key binding to toggle the gap for the bar.
+    toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
+    myPP = defaultPP
                     { ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
                     , ppTitle   = xmobarColor "green"  "" . shorten 150
                     , ppVisible = wrap "(" ")"
                     , ppHiddenNoWindows = xmobarColor "gray" ""
                     , ppHidden  = xmobarColor "lightGreen" ""
                     , ppSep     = "  --  "
-                    , ppOutput  = hPutStrLn h
                     }
 
     myKeys x = M.unions [
