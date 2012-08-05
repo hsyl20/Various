@@ -29,7 +29,7 @@ main = do
       workspaces = ["1-home","2-mail","3-web","4-dev","5-dev","6-var", "7-var","8-var", "9-music"],
 
       manageHook =  composeAll [isFullscreen --> doFullFloat] <+> manageDocks <+> manageHook baseConfig,
-      layoutHook = smartBorders $ avoidStruts  $ layoutHook baseConfig,
+      layoutHook = smartBorders $ avoidStruts $ layoutHook baseConfig,
       handleEventHook = handleEventHook baseConfig<+> docksEventHook,
       modMask = mod4Mask
       }
@@ -51,10 +51,10 @@ main = do
       azertyKeys x,
       M.fromList $ [
           ((modMask x, xK_F12), xmonadPrompt defaultXPConfig),
-          ((modMask x, xK_F3 ), shellPrompt  defaultXPConfig),
-          ((modMask x, xK_F4 ), sshPrompt    defaultXPConfig),
-          ((modMask x, xK_F5 ), themePrompt       defaultXPConfig),
-          ((modMask x, xK_F6 ), windowPromptGoto  defaultXPConfig),
+          ((modMask x, xK_x ), shellPrompt defaultXPConfig),
+          ((modMask x, xK_F4 ), sshPrompt defaultXPConfig),
+          ((modMask x, xK_F5 ), themePrompt defaultXPConfig),
+          ((modMask x, xK_F6 ), windowPromptGoto defaultXPConfig),
           ((modMask x, xK_F7 ), windowPromptBring defaultXPConfig),
           ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 1%-"),
           ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 1%+"),
