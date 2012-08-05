@@ -13,6 +13,7 @@ import XMonad.Prompt.Window
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import System.IO
+import Graphics.X11.ExtraTypes.XF86
 import qualified Data.Map as M
 
 main = do
@@ -54,6 +55,13 @@ main = do
           ((modMask x, xK_F4 ), sshPrompt    defaultXPConfig),
           ((modMask x, xK_F5 ), themePrompt       defaultXPConfig),
           ((modMask x, xK_F6 ), windowPromptGoto  defaultXPConfig),
-          ((modMask x, xK_F7 ), windowPromptBring defaultXPConfig)
+          ((modMask x, xK_F7 ), windowPromptBring defaultXPConfig),
+          ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 1%-"),
+          ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 1%+"),
+          ((0, xF86XK_AudioMute), spawn "amixer sset Master toggle"),
+          ((0, xF86XK_AudioPrev), spawn "mpc prev"),
+          ((0, xF86XK_AudioNext), spawn "mpc next"),
+          ((0, xF86XK_AudioStop), spawn "mpc stop"),
+          ((0, xF86XK_AudioPlay), spawn "mpc toggle")
         ]
       ]
