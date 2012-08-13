@@ -3,6 +3,6 @@ Config {
   commands = [ 
       Run StdinReader
     , Run Date "%A %B %_d - %H:%M" "theDate" 10
-    , Run Battery ["-L","50","-H","75","--high","green","--normal","yellow", "--low","red", "-t","<left>%"] 10
+    , Run Battery ["-t","<acstatus><left>%","-L","50","-H","75","--high","green","--normal","yellow", "--low","red", "--", "-O", "<fc=yellow>☻</fc> ", "-o", ""] 10
     ]
 }
