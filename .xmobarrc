@@ -1,5 +1,5 @@
 Config {
-  template = " %StdinReader% }{ %battery% | %theDate% ",
+  template = " %StdinReader% }{ | %battery% | %theDate% ",
   commands = [ 
       Run StdinReader
     , Run Date "%A %B %_d - %H:%M" "theDate" 10
