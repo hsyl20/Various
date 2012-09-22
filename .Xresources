@@ -25,3 +25,15 @@
 ! LightGrey + White
 *color7:  #cccccc
 *color15: #ffffff
+
+! Scroll one line up and down
+*VT100.Translations: #override Shift <Key>Up: scroll-back(1) \n\
+                               Shift <Key>Down: scroll-forw(1)
+
+! Number of saved lines
+*XTerm*saveLines: 512
+
+! Disable automatic scroll to the bottom on output
+*XTerm*scrollTtyOutput: false
+
+! reload with xrdb -m ~/.Xresources
