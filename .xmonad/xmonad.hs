@@ -36,7 +36,7 @@ main = do
     myConfig = baseConfig {
       keys      = myKeys,
 
-      workspaces = ["1-home","2-mail","3-web","4-dev","5-dev","6-var", "7-var","8-var", "9-music"],
+      workspaces = ["1-home","2-mail","3-web","4-dev","5-dev","6-misc", "7-misc","8-misc", "9-music"],
 
       manageHook = myManageHook,
       layoutHook = smartBorders $ avoidStruts $ layoutHook baseConfig,
@@ -47,7 +47,9 @@ main = do
     myManageHook = composeAll [
         isFullscreen --> doFullFloat,
         className =? "Firefox" --> doShift "3-web",
-        className =? "Thunderbird" --> doShift "2-mail"
+        className =? "Thunderbird" --> doShift "2-mail",
+        className =? "Konversation" --> doShift "1-home",
+        className =? "Kcalc" --> doFloat
       ] <+> manageDocks <+> manageHook baseConfig
     
     -- Key binding to toggle the gap for the bar.
