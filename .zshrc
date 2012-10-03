@@ -23,6 +23,7 @@ export LD_LIBRARY_PATH=/home/shenry/.usr/lib:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=/home/shenry/.usr/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 export EDITOR=vim
+export PRINTER=print-b228
 
 ########################
 # ZSH 
@@ -32,12 +33,6 @@ compinit
 promptinit
  
 setopt completealiases
-bindkey "\e[5~" history-search-backward # PageUp
-bindkey "\e[6~" history-search-forward # PageDown
-bindkey "\e[1~" beginning-of-line # Home (console)
-bindkey "\e[H"  beginning-of-line # Home (xterm)
-bindkey "\e[4~" end-of-line # End (console)
-bindkey "\e[F"  end-of-line # End (xterm)
 
 setopt prompt_subst
 
@@ -61,7 +56,16 @@ setopt inc_append_history
 # setopt share_history
 
 source ~/.zsh/git-prompt/zshrc.sh
-PROMPT='[%m:$fg[green]%~${reset_color}]%# '    # default prompt
+PROMPT='[%m:%~]%# '    # default prompt
 RPROMPT=' $(git_super_status)'     # prompt for right side of screen
 
 zstyle ':completion:*:vim:*' ignored-patterns '*.(o|a|so|aux|dvi|log|swp|fig|bbl|blg|bst|idx|ind|out|toc|class|pdf|ps)'
+
+bindkey "\e[[5~" history-search-backward # PageUp
+bindkey "\e[[6~" history-search-forward # PageDown
+bindkey "\e[[1~" beginning-of-line # Home (console)
+bindkey "\e[[H"  beginning-of-line # Home (xterm)
+bindkey "\e[[4~" end-of-line # End (console)
+bindkey "\e[[F"  end-of-line # End (xterm)
+
+. ~/.zshprompt
