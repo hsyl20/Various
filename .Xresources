@@ -26,14 +26,21 @@
 *color7:  #cccccc
 *color15: #ffffff
 
+*customization: -color
+XTerm*termName:  xterm-256color
+XTerm*dynamiccolors: true
+
 ! Scroll one line up and down
-*VT100.Translations: #override Shift <Key>Up: scroll-back(1) \n\
-                               Shift <Key>Down: scroll-forw(1)
+XTerm*VT100.Translations: #override \n\
+            Shift <Key>Up: scroll-back(1) \n\
+            Shift <Key>Down: scroll-forw(1)
 
 ! Number of saved lines
-*XTerm*saveLines: 512
+XTerm*VT100.saveLines: 16000
+XTerm*VT100.scrollTtyOutput: false
+XTerm*VT100.scrollKey: true
+XTerm.VT100.utf8: true
 
-! Disable automatic scroll to the bottom on output
-*XTerm*scrollTtyOutput: false
+XTerm*faceName: BitStream Vera Sans Mono:pixelsize=12
 
 ! reload with xrdb -m ~/.Xresources
