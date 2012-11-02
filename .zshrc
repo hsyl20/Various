@@ -13,7 +13,7 @@ alias la="ls -a"
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
-alias grep="grep --exclude-dir=.svn --exclude=Makefile.in -I"
+alias grep="grep --color --exclude-dir=.svn --exclude=Makefile.in -I"
 
 # Exports
 export XAUTHORITY="$HOME/.Xauthority"
@@ -61,11 +61,12 @@ RPROMPT=' $(git_super_status)'     # prompt for right side of screen
 
 zstyle ':completion:*:vim:*' ignored-patterns '*.(o|a|so|aux|dvi|log|swp|fig|bbl|blg|bst|idx|ind|out|toc|class|pdf|ps)'
 
-bindkey "\e[[5~" history-search-backward # PageUp
-bindkey "\e[[6~" history-search-forward # PageDown
-bindkey "\e[[1~" beginning-of-line # Home (console)
-bindkey "\e[[H"  beginning-of-line # Home (xterm)
-bindkey "\e[[4~" end-of-line # End (console)
-bindkey "\e[[F"  end-of-line # End (xterm)
+bindkey "^[[5~" history-search-backward # PageUp
+bindkey "^[[6~" history-search-forward # PageDown
+bindkey "^[[1~" beginning-of-line # Home (console)
+bindkey "^[[H"  beginning-of-line # Home (xterm)
+bindkey "^[[4~" end-of-line # End (console)
+bindkey "^[[F"  end-of-line # End (xterm)
+bindkey "^[."  insert-last-word
 
 . ~/.zshprompt
