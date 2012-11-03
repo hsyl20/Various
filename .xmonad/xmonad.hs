@@ -39,8 +39,8 @@ main = do
       workspaces = ["1-home","2-mail","3-web","4-dev","5-dev","6-misc", "7-misc","8-misc", "9-music"],
 
       manageHook = myManageHook,
-      layoutHook = smartBorders $ avoidStruts $ layoutHook baseConfig,
-      handleEventHook = handleEventHook baseConfig<+> docksEventHook,
+      layoutHook = smartBorders $ layoutHook baseConfig,
+      handleEventHook = handleEventHook baseConfig <+> docksEventHook,
       modMask = mod4Mask
       }
 
@@ -68,6 +68,7 @@ main = do
       keys baseConfig x,
       azertyKeys x,
       M.fromList $ [
+          ((modMask x .|. shiftMask, xK_z), spawn "systemctl hibernate"),
           ((modMask x, xK_F12), xmonadPrompt defaultXPConfig),
           ((modMask x, xK_x ), shellPrompt defaultXPConfig),
           ((modMask x, xK_F11 ), spawn "xlock -mode space"),
