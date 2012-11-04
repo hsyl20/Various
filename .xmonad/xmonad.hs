@@ -83,7 +83,9 @@ main = do
           ((0, xF86XK_AudioNext), spawn "mpc next"),
           ((0, xF86XK_AudioStop), spawn "mpc stop"),
           ((0, xF86XK_AudioPlay), spawn "mpc toggle"),
-          ((modMask x, xK_F3), calcPrompt defaultXPConfig "calc")
+          ((modMask x, xK_F3), calcPrompt defaultXPConfig "calc"),
+          ((0, xK_Print), spawn "screenshot scr"),
+          ((shiftMask, xK_Print), spawn "screenshot win")
         ]
       ]
 
