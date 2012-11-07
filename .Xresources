@@ -30,21 +30,20 @@
 XTerm*termName:  xterm-256color
 XTerm*dynamiccolors: true
 
-! Scroll one line up and down
 XTerm*VT100.Translations: #override \n\
             Shift <Key>Up: scroll-back(1) \n\
             Shift <Key>Down: scroll-forw(1)
 
-! Number of saved lines
 XTerm*VT100.saveLines: 16000
 XTerm*VT100.scrollTtyOutput: false
 XTerm*VT100.scrollKey: true
-XTerm.VT100.utf8: true
-XTerm.VT100.jumpScroll: false
-XTerm.VT100.multiScroll: true
-XTerm.VT100.scrollInput: false
+XTerm*VT100.utf8: always
+XTerm*VT100.jumpScroll: false
+XTerm*VT100.multiScroll: true
+XTerm*VT100.scrollInput: false
 
-XTerm*faceName: BitStream Vera Sans Mono:pixelsize=12
+XTerm.VT100.renderFont: true
+XTerm.VT100.faceName: DejaVu Sans Mono:pixelsize=12
 
 XTerm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48
 XTerm*eightBitInput: false
