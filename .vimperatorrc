@@ -1,7 +1,1 @@
-"3.4 (created: 2012/04/02 20:07:29)
-
 set toolbars=none
-set defsearch=startpage
-source! /home/shenry/.vimperatorrc.local
-
-" vim: set ft=vimperator:
