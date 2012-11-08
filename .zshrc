@@ -62,6 +62,7 @@ bindkey "^[[H"  beginning-of-line # Home (xterm)
 bindkey "^[[4~" end-of-line # End (console)
 bindkey "^[[F"  end-of-line # End (xterm)
 bindkey "^[."  insert-last-word
+bindkey "^H" backward-delete-char
 
 setopt printeightbit
 
