@@ -69,6 +69,7 @@ main = do
       azertyKeys x,
       M.fromList $ [
           ((modMask x .|. shiftMask, xK_z), spawn "systemctl hibernate"),
+          ((modMask x .|. shiftMask, xK_F12), spawn "systemctl poweroff"),
           ((modMask x, xK_F12), xmonadPrompt defaultXPConfig),
           ((modMask x, xK_x ), shellPrompt defaultXPConfig),
           ((modMask x, xK_F11 ), spawn "xlock -mode space"),
