@@ -55,8 +55,8 @@ source ~/.zsh/git-prompt/zshrc.sh
 
 zstyle ':completion:*:vim:*' ignored-patterns '*.(o|a|so|aux|dvi|log|swp|fig|bbl|blg|bst|idx|ind|out|toc|class|pdf|ps)'
 
-bindkey "^[[5~" history-search-backward # PageUp
-bindkey "^[[6~" history-search-forward # PageDown
+bindkey "^[[5~" history-beginning-search-backward # PageUp
+bindkey "^[[6~" history-beginning-search-forward # PageDown
 bindkey "^[[1~" beginning-of-line # Home (console)
 bindkey "^[[H"  beginning-of-line # Home (xterm)
 bindkey "^[[4~" end-of-line # End (console)
