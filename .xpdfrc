@@ -1,0 +1,2 @@
+bind / any find
+bind f any toggleFullScreenMode
