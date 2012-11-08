@@ -115,6 +115,17 @@ setprompt () {
 	PR_APM=''
 #    fi
     
+# ------------------------------
+# handle vi NORMAL/INSERT mode change
+PR_VIMODE="#"
+PR_VICOLOR=${PR_BLUE}
+function zle-line-init zle-keymap-select {
+        PR_VIMODE="${${KEYMAP/vicmd/Cmd}/(main|viins)/Insert}"
+        PR_VICOLOR="${${KEYMAP/vicmd/${PR_RED}}/(main|viins)/${PR_BLUE}}"
+        zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
     
     ###
     # Finally, the prompt.
@@ -123,11 +134,11 @@ setprompt () {
     PROMPT='\
 
 $PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
-$PR_BLUE$PR_SHIFT_IN$PR_ULCORNER$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
+$PR_BLUE$PR_SHIFT_IN$PR_ULCORNER$PR_BLUE$PR_HBAR$PR_SHIFT_OUT\
+$PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:\
 $PR_RED%$PR_PWDLEN<...<%~%<<\
-$PR_BLUE)\
-($PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l%(?..$PR_LIGHT_RED->%?)\
-$PR_BLUE)\
+$PR_BLUE\
+$PR_BLUE [$PR_VICOLOR$PR_VIMODE$PR_BLUE %l%(?..$PR_LIGHT_RED ErrorCode %?)$PR_BLUE] \
 $(git_super_status)\
 $PR_SHIFT_IN$PR_SHIFT_OUT\
 
@@ -144,5 +155,6 @@ $PR_BLUE$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT(\
 $PR_LIGHT_GREEN%_$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
 $PR_BLUE$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT$PR_NO_COLOUR '
 }
+
 
 setprompt

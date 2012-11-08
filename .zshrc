@@ -36,28 +36,22 @@ setopt completealiases
 
 setopt prompt_subst
 
-export HISTFILE=~/.history
-export HISTSIZE=1000
-export SAVEHIST=1000
+HISTFILE=~/.history
+HISTSIZE=10000
+SAVEHIST=10000
 
-# History commands are appended to the existing file instead of
-# overwriting it.
+setopt extended_history
 setopt append_history
-# Sequential duplicate commands only get one history entry.
+setopt inc_append_history
+setopt share_history
+
 setopt hist_ignore_all_dups
-# Only the newest of a set of duplicates (regardless of sequence) is saved
-# to file.
 setopt hist_save_no_dups
-# Ignore les lignes commencant par un espace
 setopt hist_ignore_space
 
-# Commands are added to the history file as they are entered.
-setopt inc_append_history
-# setopt share_history
+
 
 source ~/.zsh/git-prompt/zshrc.sh
-PROMPT='[%m:%~]%# '    # default prompt
-RPROMPT=' $(git_super_status)'     # prompt for right side of screen
 
 zstyle ':completion:*:vim:*' ignored-patterns '*.(o|a|so|aux|dvi|log|swp|fig|bbl|blg|bst|idx|ind|out|toc|class|pdf|ps)'
 
@@ -68,5 +62,7 @@ bindkey "^[[H"  beginning-of-line # Home (xterm)
 bindkey "^[[4~" end-of-line # End (console)
 bindkey "^[[F"  end-of-line # End (xterm)
 bindkey "^[."  insert-last-word
+
+setopt printeightbit
 
 . ~/.zshprompt
