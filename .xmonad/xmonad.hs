@@ -65,9 +65,8 @@ main = do
                     }
 
     myKeys x = M.unions [
-      keys baseConfig x,
-      azertyKeys x,
       M.fromList $ [
+          ((modMask x .|. shiftMask, xK_Return), spawn "xterm_pwd"),
           ((modMask x .|. shiftMask, xK_z), spawn "systemctl hibernate"),
           ((modMask x .|. shiftMask, xK_F12), spawn "systemctl poweroff"),
           ((modMask x, xK_F12), xmonadPrompt defaultXPConfig),
@@ -87,7 +86,9 @@ main = do
           ((modMask x, xK_F3), calcPrompt defaultXPConfig "calc"),
           ((0, xK_Print), spawn "screenshot scr"),
           ((shiftMask, xK_Print), spawn "screenshot win")
-        ]
+          ],
+      keys baseConfig x,
+      azertyKeys x
       ]
 
 calcPrompt :: XPConfig -> String -> X ()
