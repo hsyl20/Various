@@ -67,3 +67,9 @@ bindkey "^H" backward-delete-char
 setopt printeightbit
 
 . ~/.zshprompt
+
+# Automatically set X Property for the current working directory
+function chpwd() {
+   wid=`xdotool getwindowfocus`
+   `xprop -id $wid -f _XMONAD_WORKING_DIR 8s -set _XMONAD_WORKING_DIR $PWD`
+}
