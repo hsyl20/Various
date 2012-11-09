@@ -44,13 +44,13 @@ main = do
       modMask = mod4Mask
       }
 
-    myManageHook = composeAll [
+    myManageHook = manageHook baseConfig <+> manageDocks <+> composeAll [
         isFullscreen --> doFullFloat,
         className =? "Firefox" --> doShift "3-web",
         className =? "Thunderbird" --> doShift "2-mail",
         className =? "Konversation" --> doShift "1-home",
         className =? "Kcalc" --> doFloat
-      ] <+> manageDocks <+> manageHook baseConfig
+      ] 
     
     -- Key binding to toggle the gap for the bar.
     toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
