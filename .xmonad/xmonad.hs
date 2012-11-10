@@ -39,12 +39,12 @@ main = do
       workspaces = ["1-home","2-mail","3-web","4-dev","5-dev","6-misc", "7-misc","8-misc", "9-music"],
 
       manageHook = myManageHook,
-      layoutHook = smartBorders $ layoutHook baseConfig,
+      layoutHook = avoidStruts $ smartBorders $ layoutHook baseConfig,
       handleEventHook = handleEventHook baseConfig <+> docksEventHook,
       modMask = mod4Mask
       }
 
-    myManageHook = manageHook baseConfig <+> manageDocks <+> composeAll [
+    myManageHook = manageDocks <+> manageHook baseConfig <+> composeAll [
         isFullscreen --> doFullFloat,
         className =? "Firefox" --> doShift "3-web",
         className =? "Thunderbird" --> doShift "2-mail",
