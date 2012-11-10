@@ -1,0 +1,9 @@
+style "user-font" {
+  font_name = "Bitstream Vera Sans 6"
+}
+
+widget_class "*" style "user-font"
+
+gtk-font-name="Bitstream Vera Sans 6"
+gtk-icon-theme-name="Iris"
+gtk-xft-dpi=98304
