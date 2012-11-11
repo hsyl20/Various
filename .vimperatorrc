@@ -1,1 +1,24 @@
 set toolbars=none
+
+
+:js <<EOF
+
+var pref = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+
+commands.addUserCommand(['noproxy'],
+  'Switch off proxy',
+  function (args) {
+    pref.setIntPref('network.proxy.type', 0);
+  },
+  {}
+);
+
+commands.addUserCommand(['proxy'],
+  'Switch on proxy',
+  function (args) {
+    pref.setIntPref('network.proxy.type', 1);
+  },
+  {}
+);
+
+EOF
