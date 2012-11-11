@@ -40,7 +40,7 @@ main = do
 
       manageHook = myManageHook,
       layoutHook = avoidStruts $ smartBorders $ layoutHook baseConfig,
-      handleEventHook = handleEventHook baseConfig <+> docksEventHook,
+      handleEventHook = docksEventHook <+> handleEventHook baseConfig,
       modMask = mod4Mask
       }
 
@@ -48,8 +48,7 @@ main = do
         isFullscreen --> doFullFloat,
         className =? "Firefox" --> doShift "3-web",
         className =? "Thunderbird" --> doShift "2-mail",
-        className =? "Konversation" --> doShift "1-home",
-        className =? "Kcalc" --> doFloat
+        className =? "Konversation" --> doShift "1-home"
       ] 
     
     -- Key binding to toggle the gap for the bar.
