@@ -2,7 +2,6 @@
 
 wid=$(xdotool getwindowfocus)
 wd=$(xprop -id $wid -notype _XMONAD_WORKING_DIR | cut -d "=" -f 2)
-echo $wd > /tmp/truc
 
 if ( ! echo $wd | grep \" ); then
    wd=""
