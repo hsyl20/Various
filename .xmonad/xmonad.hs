@@ -52,7 +52,7 @@ manageHook'= manageDocks <+> manageHook defaultConfig <+> composeAll [
   ] 
 
 -- Available layouts
-layoutHook' = avoidStruts $ smartBorders $ layoutHook defaultConfig
+layoutHook' = smartBorders $ avoidStruts $ layoutHook defaultConfig
 
 -- Handle X events
 handleEventHook' = docksEventHook <+> handleEventHook defaultConfig
