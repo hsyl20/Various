@@ -25,6 +25,8 @@ export PKG_CONFIG_PATH=/home/shenry/.usr/lib/pkgconfig:/usr/local/lib/pkgconfig:
 export EDITOR=vim
 export PRINTER=print-b228
 
+export OCL_ICD_VENDORS=~/icds
+
 ########################
 # ZSH 
 ########################
