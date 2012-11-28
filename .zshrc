@@ -78,3 +78,5 @@ function chpwd() {
    wid=`xdotool getwindowfocus`
    `xprop -id $wid -f _XMONAD_WORKING_DIR 8s -set _XMONAD_WORKING_DIR $PWD`
 }
+
+chpwd
