@@ -9,6 +9,9 @@ numlockx on
 # Set keymap
 setxkbmap fr oss_latin9
 
+# Set right window key as compose key
+setxkbmap -option compose:rwin
+
 # Xinerama
 nscreens=`xrandr | grep "\bconnected" | wc -l`
 if [ $nscreens == "2" ]; then two_screens; fi
