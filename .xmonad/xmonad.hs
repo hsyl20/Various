@@ -45,17 +45,17 @@ myConfig = defaultConfig {
 workspaces' = ["1-home","2-mail","3-web","4-dev","5-dev","6-misc", "7-misc","8-misc", "9-music"]
 
 -- Action when a new window is opened
-manageHook'= manageDocks <+> manageHook defaultConfig <+> composeAll [
+manageHook'= manageHook defaultConfig <+> manageDocks <+> composeAll [
      isFullscreen --> doFullFloat,
      className =? "Firefox" --> doShift "3-web",
      className =? "Thunderbird" --> doShift "2-mail"
   ] 
 
 -- Available layouts
-layoutHook' = smartBorders $ avoidStruts $ layoutHook defaultConfig
+layoutHook' = avoidStruts $ smartBorders $ layoutHook defaultConfig
 
 -- Handle X events
-handleEventHook' = docksEventHook <+> handleEventHook defaultConfig
+handleEventHook' = docksEventHook <+> handleEventHook defaultConfig <+> docksEventHook
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
