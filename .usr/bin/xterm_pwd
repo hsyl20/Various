@@ -7,4 +7,5 @@ if ( ! echo $wd | grep \" ); then
    wd=""
 fi
 
-exec xterm -e "cd $wd; exec zsh"
+#exec xterm -e "cd $wd; exec zsh"
+exec urxvt -e sh -c "cd $wd; exec zsh"

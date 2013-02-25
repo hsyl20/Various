@@ -1,34 +1,13 @@
-! tangoesque scheme
+!! tangoesque scheme
 *background: #111111
 *foreground: #babdb6
-! Black (not tango) + DarkGrey
-*color0:  #000000
-*color8:  #555753
-! DarkRed + Red
-*color1:  #ff6565
-*color9:  #ff8d8d
-! DarkGreen + Green
-*color2:  #93d44f
-*color10: #c8e7a8
-! DarkYellow + Yellow
-*color3:  #eab93d
-*color11: #ffc123
-! DarkBlue + Blue
-*color4:  #204a87
-*color12: #3465a4
-! DarkMangenta + Mangenta
-*color5:  #ce5c00
-*color13: #f57900
-!DarkCyan + Cyan (both not tango)
-*color6:  #89b6e2
-*color14: #46a4ff
-! LightGrey + White
-*color7:  #cccccc
-*color15: #ffffff
 
-*customization: -color
+XTerm*customization: -color
 XTerm*termName:  xterm-256color
 XTerm*dynamiccolors: true
+
+URxvt*dynamicColors: on
+URxvt.scrollBar: false
 
 XTerm*VT100.Translations: #override \n\
             Shift <Key>Up: scroll-back(1) \n\
@@ -43,9 +22,10 @@ XTerm*VT100.multiScroll: true
 XTerm*VT100.scrollInput: false
 
 XTerm.VT100.renderFont: true
-XTerm.VT100.faceName: DejaVu Sans Mono:pixelsize=12
+!XTerm.VT100.faceName: DejaVu Sans Mono:pixelsize=12
 
 XTerm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48
 XTerm*eightBitInput: false
+XTerm*metaSendsEscape: true
 
 ! reload with xrdb -m ~/.Xresources
