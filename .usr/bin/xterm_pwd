@@ -2,6 +2,12 @@
 
 wid=$(xdotool getwindowfocus)
 wd=$(xprop -id $wid -notype _XMONAD_WORKING_DIR | cut -d "=" -f 2)
+pid=$(xprop -id $wid -notype _NET_WM_PID | cut -d "=" -f 2)
+wd2=$(pwdx $pid | cut -d ":" -f 2 | sed -e "s/^ //")
+
+if ( ! echo $wd | grep \" ); then
+   wd="\"$wd2\""
+fi
 
 if ( ! echo $wd | grep \" ); then
    wd=""
