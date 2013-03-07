@@ -1,3 +1,4 @@
 bind / any find
 bind f any toggleFullScreenMode
 urlCommand "firefox %s"
+psFile |lpr
