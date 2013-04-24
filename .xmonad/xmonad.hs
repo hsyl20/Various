@@ -77,7 +77,7 @@ keys' x = M.unions [
              ((modMask x .|. shiftMask, xK_F12),      spawn "systemctl poweroff"),
              ((modMask x, xK_F12),                    xmonadPrompt defaultXPConfig),
              ((modMask x, xK_x ),                     shellPrompt defaultXPConfig),
-             ((modMask x, xK_F11 ),                   spawn "xlock -mode space"),
+             ((modMask x, xK_F11 ),                   spawn "slock"),
              ((modMask x, xK_F4 ),                    sshPrompt defaultXPConfig),
              ((modMask x, xK_F5 ),                    themePrompt defaultXPConfig),
              ((modMask x, xK_F6 ),                    windowPromptGoto defaultXPConfig),
