@@ -18,7 +18,7 @@ alias grep="grep --color --exclude-dir=.svn --exclude=Makefile.in -I"
 # Exports
 export XAUTHORITY="$HOME/.Xauthority"
 
-export PATH=$PATH:~/.cabal/bin:~/.usr/bin
+export PATH=~/.cabal/bin:~/.usr/bin:$PATH
 export LD_LIBRARY_PATH=/home/shenry/.usr/lib:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=/home/shenry/.usr/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -52,10 +52,10 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_space
 
-setopt   notify correct pushdtohome cdablevars autolist
-setopt   correctall autocd longlistjobs
-setopt   autoresume histignoredups pushdsilent noclobber
-setopt   autopushd pushdminus extendedglob rcquotes mailwarning
+setopt notify correct pushdtohome cdablevars autolist
+setopt correctall autocd longlistjobs
+setopt autoresume histignoredups pushdsilent noclobber
+setopt autopushd pushdminus extendedglob rcquotes mailwarning
 setopt chaselinks
 setopt histverify
 unsetopt bgnice autoparamslash
