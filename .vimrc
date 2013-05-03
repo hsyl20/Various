@@ -1,5 +1,6 @@
 " Set basic options
 "set list " Show tabs and end of lines
+set mouse=a
 set expandtab " Tabulations converties en espaces
 set spelllang=en
 set laststatus=2
@@ -14,14 +15,16 @@ set hlsearch " Highlight les patterns trouvés lors des recherches
 
 " Set indentation options
 set autoindent
-set shiftwidth=2 " Indentation automatique
-set softtabstop=2 " Indentation manuelle lors de l'edition
-set tabstop=2 " Indentation lors de la lecture 
+set shiftwidth=3 " Indentation automatique
+set softtabstop=3 " Indentation manuelle lors de l'edition
+set tabstop=3 " Indentation lors de la lecture 
 
 set wildmenu " La barre de completion 
 set number " Les numeros de ligne
 
 set encoding=utf-8
+
+let loaded_matchparen = 1
 
 " Autorise le passage d'une ligne a l'autre avec les fleches gauche et droite
 " set whichwrap=<,>,[,]
@@ -37,7 +40,7 @@ set wildmenu
 set wildmode=list:longest,full
 
 " REQUIRED. This makes vim invoke latex-suite when you open a tex file.
-filetype plugin on
+"filetype plugin on
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse latex-suite. Set your grep
@@ -93,7 +96,7 @@ nmap <C-W>e :ConqueTerm zsh<CR>
 nmap <C-W>E :ConqueTermVSplit zsh<CR>
 
 " Fix a bug with accent in LatexSuite
-imap <buffer> <M-a>it <Plug>Tex_InsertItemOnThisLine
+"imap <buffer> <M-a>it <Plug>Tex_InsertItemOnThisLine
 
 "Debut de Completion
 function InsertTabWrapper(direction)
@@ -114,15 +117,6 @@ runtime ftplugin/man.vim
 
 set guioptions=aegimt
 
-vmap // y/<C-R>"<CR>
-"imap ,, <Esc>
-imap jj <Esc>
-nmap K :Man -S3 <cword><cr>
-imap <C-k> <Esc>vb"ky<Esc>:Man -S3 <cword><cr>j/<C-R>k(<CR>f(y%<Esc>:q<cr>ep!/%a
-nmap <tab> :bn<cr>
-nmap <s-tab> :bp<cr>
-nmap !/ :nohlsearch<cr>
-
 " Add text filetype detection
 au BufRead,BufNew *.txt setf text
 au BufRead,BufNew README,TODO,BUGS setf text
@@ -141,9 +135,13 @@ au BufRead,BufNewFile *.cl               setfiletype c
 au BufRead,BufNewFile *.c.inc               setfiletype c
 autocmd FileType man setlocal ro nonumber nolist fdm=indent fdn=2 sw=4 foldlevel=2 | nmap q :quit<CR> | vmap q :quit<CR>
 
-autocmd BufRead,BufNewFile *.c           set tabstop=8 |
-                                      \  set noexpandtab |
-				      \  set shiftwidth=8
+autocmd BufRead,BufNewFile *.c           set tabstop=3 |
+                                      \  set expandtab |
+				      \  set shiftwidth=3
+
+
+autocmd BufRead,BufNewFile *.cl       set ft=c
+
 autocmd BufRead,BufNewFile *.c.inc       set ft=c      |
                                       \  set tabstop=8 |
                                       \  set noexpandtab |
@@ -205,3 +203,33 @@ let ConqueTerm_ReadUnfocused = 1
 "# Haskell
 "#####################################
 autocmd BufRead *.hsc set ft=haskell
+
+nmap <Left> <C-W>h
+nmap <Right> <C-W>l
+nmap <Up> <C-W>k
+nmap <Down> <C-W>j
+
+imap <M-l> <C-o>l
+imap <M-h> <C-o>h
+imap <M-j> <C-o>j
+imap <M-k> <C-o>k
+
+imap <M-w> <C-o>w
+imap <M-b> <C-o>b
+imap <M-S-w> <C-o><S-w>
+imap <M-S-b> <C-o><S-b>
+imap <M-S-l> <C-o><S-l>
+imap <M-S-h> <C-o><S-h>
+
+imap <M-S-j> <C-o><S-j>
+imap <M-S-k> <C-o><S-k>
+
+vmap // y/<C-R>"<CR>
+"imap ,, <Esc>
+imap ² <Esc>
+nmap K :Man -S3 <cword><cr>
+imap <C-k> <Esc>vb"ky<Esc>:Man -S3 <cword><cr>j/<C-R>k(<CR>f(y%<Esc>:q<cr>ep!/%a
+nmap <tab> :bn<cr>
+nmap <s-tab> :bp<cr>
+nmap !/ :nohlsearch<cr>
+
