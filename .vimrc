@@ -39,8 +39,7 @@ set mousemodel=popup
 set wildmenu
 set wildmode=list:longest,full
 
-" REQUIRED. This makes vim invoke latex-suite when you open a tex file.
-"filetype plugin on
+filetype plugin on
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse latex-suite. Set your grep
@@ -95,9 +94,6 @@ nnoremap <silent> <F2> :TlistToggle<CR>
 nmap <C-W>e :ConqueTerm zsh<CR>
 nmap <C-W>E :ConqueTermVSplit zsh<CR>
 
-" Fix a bug with accent in LatexSuite
-"imap <buffer> <M-a>it <Plug>Tex_InsertItemOnThisLine
-
 "Debut de Completion
 function InsertTabWrapper(direction)
   let col = col('.') - 1
@@ -136,17 +132,21 @@ au BufRead,BufNewFile *.c.inc               setfiletype c
 autocmd FileType man setlocal ro nonumber nolist fdm=indent fdn=2 sw=4 foldlevel=2 | nmap q :quit<CR> | vmap q :quit<CR>
 
 autocmd BufRead,BufNewFile *.c           set tabstop=3 |
-                                      \  set expandtab |
-				      \  set shiftwidth=3
+                                       \  set expandtab |
+                                       \  set shiftwidth=3
 
 
 autocmd BufRead,BufNewFile *.cl       set ft=c
 
-autocmd BufRead,BufNewFile *.c.inc       set ft=c      |
-                                      \  set tabstop=8 |
-                                      \  set noexpandtab |
-				      \  set shiftwidth=8
-				                              
+autocmd BufRead,BufNewFile *.c.inc        set ft=c      |
+                                       \  set tabstop=8 |
+                                       \  set noexpandtab |
+                                       \  set shiftwidth=8
+
+autocmd BufRead,BufNewFile *.hs           set tabstop=8 |
+                                       \  set expandtab |
+                                       \  set shiftwidth=8
+
 autocmd BufRead,BufNewFile Makefile      set noexpandtab
 autocmd BufRead,BufNewFile COMMIT_EDITMSG set spell
 
@@ -223,6 +223,9 @@ imap <M-S-h> <C-o><S-h>
 
 imap <M-S-j> <C-o><S-j>
 imap <M-S-k> <C-o><S-k>
+
+imap <M-x> <C-o>x
+imap <M-S-x> <C-o><S-x>
 
 vmap // y/<C-R>"<CR>
 "imap ,, <Esc>
