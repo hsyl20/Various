@@ -1,14 +1,23 @@
 #/bin/sh
 
 wid=$(xdotool getwindowfocus)
-wd=$(xprop -id $wid -notype _XMONAD_WORKING_DIR | cut -d "=" -f 2 | cut -d "\"" -f 2)
 
-if [[ -n $wd ]]
-   then exec terminology -d $wd
+prop=$(xprop -id $wid -notype _XMONAD_WORKING_DIR)
+
+notFound=$(echo $prop | grep "not found")
+
+if [[ -z $notFound ]]
+   then wd=$(echo $prop | cut -d "=" -f 2 | cut -d "\"" -f 2)
+
+   if [[ -n $wd ]]
+      then exec terminology -d $wd
+   fi
 fi
 
 pid=$(xdotool getwindowpid $wid)
 wd=$(pwdx $pid | cut -d ":" -f 2 | sed -e "s/^ //")
+
+echo $wd
 
 if [[ -n $wd ]]
    then exec terminology -d $wd
