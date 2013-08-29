@@ -10,7 +10,7 @@ if [[ -z $notFound ]]
 fi
 
 if [[ -n $wd ]]
-   then exec terminology -d $wd
+   then exec terminology -d "$wd"
 fi
 
 pid=$(xdotool getwindowpid $wid)
@@ -18,7 +18,7 @@ pid=$(xdotool getwindowpid $wid)
 wd=$(pwdx $pid | cut -d ":" -f 2 | sed -e "s/^ //")
 
 if [[ -n $wd ]]
-   then exec terminology -d $wd
+   then exec terminology -d "$wd"
 fi
 
 exec terminology
