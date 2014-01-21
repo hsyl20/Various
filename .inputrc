@@ -13,7 +13,3 @@
 set expand-tilde off
 set show-all-if-ambiguous on
 set visible-stats on
-
-set input-meta on
-set output-meta on
-set meta-flag on
