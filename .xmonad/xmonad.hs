@@ -48,7 +48,8 @@ workspaces' = ["1-home","2-mail","3-web","4-dev","5-dev","6-misc", "7-misc","8-m
 manageHook'= manageHook defaultConfig <+> manageDocks <+> composeAll [
      isFullscreen --> doFullFloat,
      className =? "Firefox" --> doShift "3-web",
-     className =? "Thunderbird" --> doShift "2-mail"
+     className =? "Thunderbird" --> doShift "2-mail",
+     className =? "Empathy" --> doShift "2-mail"
   ] 
 
 -- Available layouts
@@ -73,7 +74,7 @@ myPP = defaultPP
 keys' x = M.unions [
       M.fromList $ [
              ((modMask x .|. shiftMask, xK_Return),   spawn "xterm_pwd"),
-             ((modMask x .|. shiftMask, xK_z),        spawn "systemctl hibernate"),
+             ((modMask x .|. shiftMask, xK_z),        spawn "slock_hibernate"),
              ((modMask x .|. shiftMask, xK_F12),      spawn "systemctl poweroff"),
              ((modMask x, xK_F12),                    xmonadPrompt defaultXPConfig),
              ((modMask x, xK_x ),                     shellPrompt defaultXPConfig),
