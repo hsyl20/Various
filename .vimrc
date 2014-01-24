@@ -173,6 +173,11 @@ autocmd BufReadPost *
 "#####################################
 autocmd BufRead *.hsc set ft=haskell
 
+"#####################################
+"# Markdown
+"#####################################
+autocmd BufRead *.md set ft=markdown
+
 imap <M-w> <C-o>w
 imap <M-b> <C-o>b
 imap <M-S-w> <C-o><S-w>
