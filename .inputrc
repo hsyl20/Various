@@ -13,3 +13,13 @@
 set expand-tilde off
 set show-all-if-ambiguous on
 set visible-stats on
+
+# Active la saisie 8bit
+set meta-flag On 
+set input-meta On
+
+# Désactive la suppression du 8ème bit
+set convert-meta Off
+
+# Conserve le 8ème bit pour l'affichage
+set output-meta On

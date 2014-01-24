@@ -157,34 +157,6 @@ autocmd BufRead,BufNewFile *.html       set shiftwidth=4 |
 set statusline=%F%m%r%h%w\ [%v,%l][%p%%] 
 set laststatus=2 
 
-"####################################
-"# VALA                             
-"####################################
-autocmd BufRead *.vala set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
-autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
-au BufRead,BufNewFile *.vala            setfiletype vala
-au BufRead,BufNewFile *.vapi            setfiletype vala
-
-" Disable valadoc syntax highlight
-"let vala_ignore_valadoc = 1
-
-" Enable comment strings
-let vala_comment_strings = 1
-
-" Highlight space errors
-let vala_space_errors = 1
-" Disable trailing space errors
-"let vala_no_trail_space_error = 1
-" Disable space-tab-space errors
-let vala_no_tab_space_error = 1
-
-" Minimum lines used for comment syncing (default 50)
-"let vala_minlines = 120
-
-"#####################################
-"# Fin VALA
-"#####################################
-
 "########################################
 "# Sauvegarde position dans les fichiers
 "########################################
@@ -196,23 +168,10 @@ autocmd BufReadPost *
       \   exe "normal g`\"" |
       \ endif
 
-let ConqueTerm_ReadUnfocused = 1
-
-
 "#####################################
 "# Haskell
 "#####################################
 autocmd BufRead *.hsc set ft=haskell
-
-nmap <Left> <C-W>h
-nmap <Right> <C-W>l
-nmap <Up> <C-W>k
-nmap <Down> <C-W>j
-
-imap <M-l> <C-o>l
-imap <M-h> <C-o>h
-imap <M-j> <C-o>j
-imap <M-k> <C-o>k
 
 imap <M-w> <C-o>w
 imap <M-b> <C-o>b
