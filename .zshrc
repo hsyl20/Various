@@ -56,6 +56,7 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 alias grep="grep --color --exclude-dir=.svn --exclude=Makefile.in -I"
+alias git="LANG=en_US.UTF-8 git"
 
 # Exports
 export XAUTHORITY="$HOME/.Xauthority"
@@ -66,9 +67,8 @@ export PKG_CONFIG_PATH=/home/shenry/.usr/lib/pkgconfig:/usr/local/lib/pkgconfig:
 
 export EDITOR=vim
 export PAGER=less
-export PRINTER=print-b238
+export _JAVA_AWT_WM_NONREPARENTING=1
 
-export OCL_ICD_VENDORS=~/.icds
 
 bindkey "^[[5~" history-beginning-search-backward # PageUp
 bindkey "^[[6~" history-beginning-search-forward # PageDown
