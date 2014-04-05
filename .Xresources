@@ -1,13 +1,7 @@
-!! tangoesque scheme
-*background: #111111
-*foreground: #babdb6
-
-XTerm*customization: -color
+*customization: -color
 XTerm*termName:  xterm-256color
 XTerm*dynamiccolors: true
-
-URxvt*dynamicColors: on
-URxvt.scrollBar: false
+XTerm*locale: true
 
 XTerm*VT100.Translations: #override \n\
             Shift <Key>Up: scroll-back(1) \n\
@@ -17,15 +11,16 @@ XTerm*VT100.saveLines: 16000
 XTerm*VT100.scrollTtyOutput: false
 XTerm*VT100.scrollKey: true
 XTerm*VT100.utf8: always
+XTerm*VT100.jumpScroll: false
 XTerm*VT100.multiScroll: true
 XTerm*VT100.scrollInput: false
 
 XTerm.VT100.renderFont: true
 !XTerm.VT100.faceName: DejaVu Sans Mono:pixelsize=12
+XTerm.VT100.faceName: Inconsolitas:pixelsize=14
+XTerm*reverseVideo: on
 
 XTerm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48
 XTerm*eightBitInput: false
-XTerm*metaSendsEscape: true
-XTerm*fastScroll: True
 
 ! reload with xrdb -m ~/.Xresources
