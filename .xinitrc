@@ -20,5 +20,11 @@ if [ $nscreens == "2" ]; then two_screens; fi
 xsetroot -solid black
 #xloadimage -onroot -center -border black .xconfig/Background.jpg
 
-# Launch xmonad
-xmonad
+# Cursor
+xsetroot -cursor_name left_ptr
+
+exec $1
+# exec gnome-session
+# exec startkde
+# exec startxfce4
+# ...or the Window Manager of your choice
