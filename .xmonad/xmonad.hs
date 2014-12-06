@@ -26,6 +26,7 @@ import System.Posix.Process (executeFile)
 import Codec.Binary.UTF8.String
 import Control.Monad (unless)
 import qualified Data.Map as Map
+import Data.Char (toUpper)
 
 main = do
   myConfigWithBar <- statusBar "xmobar" myPP toggleStrutsKey myConfig
@@ -43,14 +44,15 @@ myConfig = defaultConfig {
 }
 
 -- Names of the workspaces
-workspaces' = ["1-home","2-mail","3-web","4-dev","5-dev","6-misc", "7-misc","8-misc", "9-music"]
+workspaces' = ["uno","dos","tres","cuatro","cinco"
+              ,"seis", "siete","ocho", "nueve"]
 
 -- Action when a new window is opened
 manageHook'= manageDocks <+> composeAll [
      isFullscreen --> doFullFloat,
-     className =? "Firefox" --> doShift "3-web",
-     className =? "Thunderbird" --> doShift "2-mail",
-     className =? "Empathy" --> doShift "2-mail"
+     className =? "Firefox" --> doShift "tres",
+     className =? "Thunderbird" --> doShift "dos",
+     className =? "Empathy" --> doShift "dos"
   ] 
 
 -- Available layouts
@@ -63,12 +65,14 @@ handleEventHook' = docksEventHook <+> handleEventHook defaultConfig <+> docksEve
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 myPP = defaultPP
-              { ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
-              , ppTitle   = xmobarColor "green"  "" . shorten 150
+              { ppCurrent = wrap "[" "]" -- xmobarColor "white" "" -- . wrap "[" "]"
+              , ppTitle   = xmobarColor "#5252DD"  "" . shorten 200
               , ppVisible = wrap "(" ")"
-              , ppHiddenNoWindows = xmobarColor "gray" ""
-              , ppHidden  = xmobarColor "lightGreen" ""
-              , ppSep     = "  --  "
+              , ppHiddenNoWindows = xmobarColor "#333333" ""
+              , ppHidden  = xmobarColor "#888888" ""
+              , ppUrgent  = map toUpper
+              , ppSep     = " | "
+              , ppOrder   = \ [workspaces,layout,title] -> [workspaces,title]
               }
 
 -- Aditional key bindings
