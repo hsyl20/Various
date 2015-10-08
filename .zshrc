@@ -56,19 +56,25 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 alias grep="grep --color --exclude-dir=.svn --exclude=Makefile.in -I"
-alias git="LANG=en_US.UTF-8 git"
+alias git="LC_ALL=C git"
+
+alias livestreamer-live="livestreamer"
+alias livestreamer-replay="livestreamer --player-passthrough=hls --twitch-oauth-token=7hgig7wvv31nif4h0k2fex3stz30mz --player=\"mpv --cache 4096\""
 
 # Exports
 export XAUTHORITY="$HOME/.Xauthority"
 
-export PATH=~/.cabal/bin:~/.usr/bin:$PATH
-export LD_LIBRARY_PATH=/home/shenry/.usr/lib:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=/home/shenry/.usr/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PATH=~/.cabal/bin:/home/hsyl20/.usr/bin:$PATH
+export LD_LIBRARY_PATH=/home/hsyl20/.usr/lib:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=/home/hsyl20/.usr/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# MAQAO
+export PATH=/home/hsyl20/Exascale/MAQAODEV/bin:$PATH
+export LD_LIBRARY_PATH=/home/hsyl20/Exascale/MAQAODEV/lib:$LD_LIBRARY_PATH
 
 export EDITOR=vim
 export PAGER=less
 export _JAVA_AWT_WM_NONREPARENTING=1
-
 
 bindkey "^[[5~" history-beginning-search-backward # PageUp
 bindkey "^[[6~" history-beginning-search-forward # PageDown
