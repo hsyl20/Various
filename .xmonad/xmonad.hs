@@ -12,6 +12,7 @@ import XMonad.Prompt.Ssh
 import XMonad.Prompt.Theme
 import XMonad.Prompt.Window
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run
 import qualified XMonad.StackSet as W
@@ -26,7 +27,6 @@ import System.Posix.Process (executeFile)
 import Codec.Binary.UTF8.String
 import Control.Monad (unless)
 import qualified Data.Map as Map
-import Data.Char (toUpper)
 
 main = do
   myConfigWithBar <- statusBar "xmobar" myPP toggleStrutsKey myConfig
@@ -34,45 +34,46 @@ main = do
 
 -- Configuration
 myConfig = defaultConfig {
-   keys          = keys',
-   mouseBindings = mouseBindings',
-   workspaces = workspaces',
-   manageHook = manageHook',
-   layoutHook = layoutHook',
+   keys            = keys',
+   mouseBindings   = mouseBindings',
+   workspaces      = workspaces',
+   manageHook      = manageHook',
+   layoutHook      = layoutHook',
    handleEventHook = handleEventHook',
-   modMask = mod4Mask
+   modMask         = mod4Mask
 }
 
 -- Names of the workspaces
-workspaces' = ["uno","dos","tres","cuatro","cinco"
-              ,"seis", "siete","ocho", "nueve"]
+workspaces' = ["1-home","2-mail","3-web","4-dev","5-dev","6-misc", "7-misc","8-misc", "9-music"]
 
 -- Action when a new window is opened
 manageHook'= manageDocks <+> composeAll [
-     isFullscreen --> doFullFloat,
-     className =? "Firefox" --> doShift "tres",
-     className =? "Thunderbird" --> doShift "dos",
-     className =? "Empathy" --> doShift "dos"
+     isFullscreen                      --> doFullFloat,
+     className =? "Firefox"            --> doShift "3-web",
+     className =? "Thunderbird"        --> doShift "2-mail",
+     className =? "qemu-system-x86_64" --> doCenterFloat
   ] 
 
 -- Available layouts
 layoutHook' = avoidStruts $ smartBorders $ layoutHook defaultConfig
 
 -- Handle X events
-handleEventHook' = docksEventHook <+> handleEventHook defaultConfig <+> docksEventHook
+handleEventHook' =
+       docksEventHook
+   <+> handleEventHook defaultConfig
+   <+> docksEventHook
+   <+> fullscreenEventHook
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 myPP = defaultPP
-              { ppCurrent = wrap "[" "]" -- xmobarColor "white" "" -- . wrap "[" "]"
-              , ppTitle   = xmobarColor "#5252DD"  "" . shorten 200
+              { ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
+              , ppTitle   = xmobarColor "green"  "" . shorten 150
               , ppVisible = wrap "(" ")"
-              , ppHiddenNoWindows = xmobarColor "#333333" ""
-              , ppHidden  = xmobarColor "#888888" ""
-              , ppUrgent  = map toUpper
-              , ppSep     = " | "
-              , ppOrder   = \ [workspaces,layout,title] -> [workspaces,title]
+              , ppHiddenNoWindows = xmobarColor "gray" ""
+              , ppHidden  = xmobarColor "lightGreen" ""
+              , ppSep     = "  --  "
               }
 
 -- Aditional key bindings
@@ -84,10 +85,10 @@ keys' x = Map.unions [
              --((modMask x .|. shiftMask, xK_F12),      xmonadPrompt defaultXPConfig),
              ((modMask x, xK_x ),                     shellPrompt defaultXPConfig),
              ((modMask x .|. shiftMask, xK_F11 ),     spawn "slock"),
-             ((modMask x .|. shiftMask, xK_F4 ),      sshPrompt defaultXPConfig),
-             ((modMask x .|. shiftMask, xK_F5 ),      themePrompt defaultXPConfig),
-             ((modMask x .|. shiftMask, xK_F6 ),      windowPromptGoto defaultXPConfig),
-             ((modMask x .|. shiftMask, xK_F7 ),      windowPromptBring defaultXPConfig),
+             --((modMask x .|. shiftMask, xK_F4 ),      sshPrompt defaultXPConfig),
+             --((modMask x .|. shiftMask, xK_F5 ),      themePrompt defaultXPConfig),
+             --((modMask x .|. shiftMask, xK_F6 ),      windowPromptGoto defaultXPConfig),
+             --((modMask x .|. shiftMask, xK_F7 ),      windowPromptBring defaultXPConfig),
              ((0, xF86XK_AudioLowerVolume),           spawn "amixer set Master 1%-"),
              ((0, xF86XK_AudioRaiseVolume),           spawn "amixer set Master 1%+"),
              ((0, xF86XK_AudioMute),                  spawn "amixer sset Master toggle"),
