@@ -1,46 +1,36 @@
+{-# LANGUAGE PatternGuards #-}
+
 import XMonad
 import XMonad.Config.Azerty
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Prompt
-import XMonad.Prompt.Input
-import XMonad.Prompt.XMonad
 import XMonad.Prompt.Shell
-import XMonad.Prompt.Ssh
-import XMonad.Prompt.Theme
-import XMonad.Prompt.Window
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run
 import qualified XMonad.StackSet as W
 
-import Data.Char (isSpace,isControl)
-import Data.Maybe (fromMaybe, listToMaybe)
-import System.IO 
-import System.Process
 import Graphics.X11.ExtraTypes.XF86
-import System.Posix.IO
-import System.Posix.Process (executeFile)
-import Codec.Binary.UTF8.String
-import Control.Monad (unless)
 import qualified Data.Map as Map
+import Text.Read (readMaybe)
+import Data.Char
 
 main = do
   myConfigWithBar <- statusBar "xmobar" myPP toggleStrutsKey myConfig
   xmonad myConfigWithBar
 
 -- Configuration
-myConfig = defaultConfig
-   { keys            = keys'
-   , mouseBindings   = mouseBindings'
-   , workspaces      = workspaces'
-   , manageHook      = manageHook'
-   , layoutHook      = layoutHook'
-   , handleEventHook = handleEventHook'
-   , modMask         = mod4Mask
+myConfig = def
+   { keys              = keys'
+   , mouseBindings     = mouseBindings'
+   , workspaces        = workspaces'
+   , manageHook        = manageHook'
+   , layoutHook        = layoutHook'
+   , handleEventHook   = handleEventHook'
+   , modMask           = mod4Mask
+   , focusFollowsMouse = True
    }
 
 -- Names of the workspaces
@@ -62,22 +52,22 @@ manageHook'= manageDocks <+> composeAll
    , className =? "Firefox"            --> doShift "3-web"
    , className =? "Thunderbird"        --> doShift "2-mail"
    , className =? "qemu-system-x86_64" --> doCenterFloat
+   , className =? "Qemu-system-x86_64" --> doCenterFloat
    ] 
 
 -- Available layouts
-layoutHook' = avoidStruts $ smartBorders $ layoutHook defaultConfig
+layoutHook' = avoidStruts $ smartBorders $ layoutHook def
 
 -- Handle X events
 handleEventHook'
    =   docksEventHook
-   <+> handleEventHook defaultConfig
-   <+> docksEventHook
+   <+> handleEventHook def
    <+> fullscreenEventHook
 
 -- Key binding to toggle the gap for the bar.
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+toggleStrutsKey XConfig {XMonad.modMask = mMask} = (mMask, xK_b)
 
-myPP = defaultPP
+myPP = def
    { ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
    , ppTitle   = xmobarColor "green"  "" . shorten 150
    , ppVisible = wrap "(" ")"
@@ -93,7 +83,9 @@ keys' x = Map.unions
       , ((modMask x .|. shiftMask, xK_z),        spawn "systemctl hibernate")
       , ((modMask x .|. shiftMask, xK_F12),      spawn "systemctl poweroff")
       --, ((modMask x .|. shiftMask, xK_F12),      xmonadPrompt defaultXPConfig)
-      , ((modMask x, xK_x ),                     shellPrompt defaultXPConfig)
+      , ((modMask x, xK_x ),                     shellPrompt def)
+--      , ((modMask x, xK_u ),                     unicodePrompt def)
+      , ((modMask x .|. shiftMask , xK_u ),      unicodePromptChar def)
       , ((modMask x .|. shiftMask, xK_F11 ),     spawn "slock")
       --, ((modMask x .|. shiftMask, xK_F4 ),      sshPrompt defaultXPConfig)
       --, ((modMask x .|. shiftMask, xK_F5 ),      themePrompt defaultXPConfig)
@@ -101,6 +93,8 @@ keys' x = Map.unions
       --, ((modMask x .|. shiftMask, xK_F7 ),      windowPromptBring defaultXPConfig)
       , ((0, xF86XK_AudioLowerVolume),           spawn "amixer set Master 1%-")
       , ((0, xF86XK_AudioRaiseVolume),           spawn "amixer set Master 1%+")
+      , ((modMask x .|. shiftMask, xK_KP_Subtract), spawn "amixer set Master 1%-")
+      , ((modMask x .|. shiftMask, xK_KP_Add),      spawn "amixer set Master 1%+")
       , ((0, xF86XK_AudioMute),                  spawn "amixer sset Master toggle")
       , ((0, xF86XK_AudioPrev),                  spawn "mpc prev")
       , ((0, xF86XK_AudioNext),                  spawn "mpc next")
@@ -111,20 +105,46 @@ keys' x = Map.unions
       , ((shiftMask .|. modMask x, xK_Print),    spawn "/home/hsyl20/.usr/bin/screenshot area")
       ]
    
-
-       
      -- mod-[F1..F9] %! Switch to workspace N
      -- mod-shift-[F1..F9] %! Move client to workspace N
    , Map.fromList
       [((m .|. modMask x, k), windows $ f i)
         | (i, k) <- zip workspaces' [xK_F1 .. xK_F9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
       ]
 
-   , keys defaultConfig x
+   , keys def x
 
    , azertyKeys x
+       
    ]
 
 -- Additional mouse bindings
-mouseBindings' = mouseBindings defaultConfig
+mouseBindings' = mouseBindings def
+
+----------------------
+-- Unicode char prompt
+
+-- | Prompt the user for a unicode character to be inserted into the paste buffer of the X server.
+unicodePromptChar :: XPConfig -> X ()
+unicodePromptChar cfg = mkXPrompt UnicodeChar cfg unicodeCompl paste
+  where
+    unicodeCompl s
+      | Just n <- readMaybe s
+      , not (isControl (chr n))
+      = return [s ++ " - " ++ [chr n]]
+    unicodeCompl _ = return []
+
+    paste [] = return ()
+    paste s
+      | Just n <- readMaybe s = do
+        _ <- runProcessWithInput "xsel" ["-i"] [chr n]
+        return ()
+      | otherwise = return ()
+
+data UnicodeChar = UnicodeChar
+instance XPrompt UnicodeChar where
+    showXPrompt UnicodeChar = "Unicode code: "
+    commandToComplete UnicodeChar s = s
+    nextCompletion UnicodeChar = getNextCompletion
+

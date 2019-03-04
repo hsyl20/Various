@@ -55,22 +55,20 @@ alias la="ls -a"
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
-alias grep="grep --color --exclude-dir=.svn --exclude=Makefile.in -I"
+alias grep="grep --color --exclude-dir=.svn --exclude=Makefile.in --exclude=\\*.html --exclude=\\*.tmp2 --exclude=\\*.tmp -I"
+alias ag="ag --ignore-dir=.svn --ignore=Makefile.in --ignore=\\*.html --ignore=\\*.tmp2 --ignore=\\*.tmp"
 alias git="LC_ALL=C git"
+alias todo="vim ~/travail/haskus/todo"
 
-alias livestreamer-live="livestreamer"
-alias livestreamer-replay="livestreamer --player-passthrough=hls --twitch-oauth-token=7hgig7wvv31nif4h0k2fex3stz30mz --player=\"mpv --cache 4096\""
+alias streamlink-live="streamlink"
+alias streamlink-replay="streamlink --player-passthrough=hls --twitch-oauth-token=7hgig7wvv31nif4h0k2fex3stz30mz"
 
 # Exports
 export XAUTHORITY="$HOME/.Xauthority"
 
-export PATH=~/.cabal/bin:/home/hsyl20/.usr/bin:$PATH
+export PATH=~/.cabal/bin:/home/hsyl20/.usr/bin:/home/hsyl20/.local/bin:$PATH
 export LD_LIBRARY_PATH=/home/hsyl20/.usr/lib:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=/home/hsyl20/.usr/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-
-# MAQAO
-export PATH=/home/hsyl20/Exascale/MAQAODEV/bin:$PATH
-export LD_LIBRARY_PATH=/home/hsyl20/Exascale/MAQAODEV/lib:$LD_LIBRARY_PATH
 
 export EDITOR=vim
 export PAGER=less
@@ -88,6 +86,11 @@ bindkey "^[[3~" delete-char
 bindkey "^[[1;5D" backward-word 
 bindkey "^[[1;5C" forward-word 
 
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
 # Automatically set X Property for the current working directory
 function chpwd() {
    wid=`xdotool getwindowfocus`
@@ -95,3 +98,9 @@ function chpwd() {
 }
 
 chpwd
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+precmd() {
+    vcs_info
+}
