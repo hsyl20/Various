@@ -1,27 +1,34 @@
-#/bin/sh
+#/bin/bash
 
+function open_term {
+   # $1 = working directory
+
+   #exec terminology -d "$1"
+   #exec xterm -e "cd ${1@Q}; exec zsh"
+   exec kitty -d "$1"
+}
+
+# try to get the current path from the selected window properties
 wid=$(xdotool getwindowfocus)
-
 prop=$(xprop -id $wid -notype _XMONAD_WORKING_DIR)
 notFound=$(echo $prop | grep "_XMONAD_WORKING_DIR:")
 
-if [[ -z $notFound ]]
-   then wd=$(echo $prop | cut -d "=" -f 2 | cut -d "\"" -f 2)
+if [[ -z $notFound ]]; then
+   wd=$(echo $prop | cut -d "=" -f 2 | cut -d "\"" -f 2)
 fi
 
-if [[ -n $wd ]]
-   #then exec terminology -d "$wd"
-   then exec xterm -e "cd $wd; exec zsh"
+if [[ -n $wd ]]; then
+   open_term $wd
 fi
 
+# try to get the current path from the selected window program path
 pid=$(xdotool getwindowpid $wid)
-
 wd=$(pwdx $pid | cut -d ":" -f 2 | sed -e "s/^ //")
 
-if [[ -n $wd ]]
-   #then exec terminology -d "$wd"
-   then exec xterm -e "cd $wd; exec zsh"
+if [[ -n $wd ]]; then
+   open_term $wd
+else
+   # open without specific path
+   open_term ""
 fi
 
-#exec terminology
-exec xterm
