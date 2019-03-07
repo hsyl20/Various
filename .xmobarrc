@@ -1,13 +1,13 @@
-Config {
-  template = " %StdinReader% }{ | %coretemp% | %multicpu% | Volume %volume% | %theDate% ",
-  commands = [ 
-      Run StdinReader
-    , Run Com "/home/hsyl20/.usr/bin/master_sound_volume" [] "volume" 30
-    --, Run Battery ["-t","<acstatus><left>%","-L","50","-H","75","--high","green","--normal","yellow", "--low","red", "--", "-O", "<fc=yellow>☻</fc> ", "-o", ""] 10
-    , Run Date "%A %d/%m/%y - %H:%M" "theDate" 50
-    , Run MultiCpu ["-t", "CPU (<total>%) <autototal>", "-L","3","-H","50","--normal","green","--high","red"] 20
-    , Run CoreTemp [ "-t", "CoreTemp <core0>-<core1>-<core2>-<core3> °C"
-                   , "-L", "40", "-H", "60"
-                   , "-l","lightblue","-n","gray90","-h","red"] 50
-    ]
-}
+Config
+   { template = " %StdinReader% }{ | %coretemp% | %multicpu% | Volume %volume% | %theDate% "
+   , allDesktops = True
+   , commands =
+      [ Run StdinReader
+      , Run Com "/home/hsyl20/.usr/bin/master_sound_volume" [] "volume" 50
+      , Run Date "%A %d/%m/%y - %H:%M" "theDate" 100
+      , Run MultiCpu ["-t", "CPU <total>%", "-L","3","-H","50","--normal","green","--high","red"] 100
+      , Run CoreTemp [ "-t", "<core0>-<core1>-<core2>-<core3> °C"
+                     , "-L", "40", "-H", "60"
+                     , "-l","lightblue","-n","gray90","-h","red"] 100
+      ]
+   }
