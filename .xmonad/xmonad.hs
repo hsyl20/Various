@@ -76,6 +76,13 @@ myPP = def
    , ppSep     = "  --  "
    }
 
+promptConfig = def
+   { font              = "xft:Terminus:pixelsize=14"
+   , height            = 24
+   , promptBorderWidth = 1
+   , historyFilter     = deleteConsecutive
+   }
+
 -- Aditional key bindings
 keys' x = Map.unions
    [ Map.fromList 
@@ -83,7 +90,7 @@ keys' x = Map.unions
       , ((modMask x .|. shiftMask, xK_z),        spawn "systemctl hibernate")
       , ((modMask x .|. shiftMask, xK_F12),      spawn "systemctl poweroff")
       --, ((modMask x .|. shiftMask, xK_F12),      xmonadPrompt defaultXPConfig)
-      , ((modMask x, xK_x ),                     shellPrompt def)
+      , ((modMask x, xK_x ),                     shellPrompt promptConfig)
 --      , ((modMask x, xK_u ),                     unicodePrompt def)
       , ((modMask x .|. shiftMask , xK_u ),      unicodePromptChar def)
       , ((modMask x .|. shiftMask, xK_F11 ),     spawn "slock")
