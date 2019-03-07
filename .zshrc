@@ -93,8 +93,10 @@ kitty + complete setup zsh | source /dev/stdin
 
 # Automatically set X Property for the current working directory
 function chpwd() {
-   wid=`xdotool getwindowfocus`
-   `xprop -id $wid -f _XMONAD_WORKING_DIR 8s -set _XMONAD_WORKING_DIR $PWD`
+   if xset q &>/dev/null; then
+      wid=`xdotool getwindowfocus`
+      `xprop -id $wid -f _XMONAD_WORKING_DIR 8s -set _XMONAD_WORKING_DIR $PWD`
+   fi
 }
 
 chpwd
