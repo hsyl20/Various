@@ -45,8 +45,10 @@ source $ZSH/oh-my-zsh.sh
 PROMPT='%{$fg[magenta]%}[%m:%~] %{$reset_color%}'
 
 unsetopt share_history
+unsetopt beep
 
 # aliases
+alias v="gvim"
 alias s="cd .."
 alias df="df -h"
 alias ls="ls --color"
