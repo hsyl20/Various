@@ -1,0 +1,5 @@
+#!/bin/sh
+
+slock &
+sleep 2
+systemctl hibernate

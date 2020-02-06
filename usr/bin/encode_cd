@@ -1,4 +1,4 @@
 #!/bin/sh
 mkdir -p ~/Musique
 cd ~/Musique
-abcde -1 -o flac
+abcde -o flac -d /dev/sr0

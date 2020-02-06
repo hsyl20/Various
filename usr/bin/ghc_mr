@@ -1,0 +1,2 @@
+#!/bin/sh
+firefox "https://gitlab.haskell.org/ghc/ghc/merge_requests/${1}"

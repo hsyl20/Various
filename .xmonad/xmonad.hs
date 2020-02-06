@@ -40,11 +40,10 @@ workspaces' =
    , "3-web"
    , "4-dev"
    , "5-dev"
-   , "6-dev"
-   , "7-dev"
-   , "8-dev"
-   , "9-dev"
-   , "0-dev"
+   , "6-misc"
+   , "7-misc"
+   , "8-misc"
+   , "9-music"
    ]
 
 -- Action when a new window is opened
@@ -113,6 +112,14 @@ keys' x = Map.unions
       , ((shiftMask .|. modMask x, xK_Print),    spawn "/home/hsyl20/.usr/bin/screenshot area")
       ]
    
+     -- mod-[F1..F9] %! Switch to workspace N
+     -- mod-shift-[F1..F9] %! Move client to workspace N
+   , Map.fromList
+      [((m .|. modMask x, k), windows $ f i)
+        | (i, k) <- zip workspaces' [xK_F1 .. xK_F9]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+      ]
+
    , keys def x
 
    , azertyKeys x
