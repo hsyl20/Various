@@ -1,0 +1,11 @@
+#!/bin/sh
+set -euo pipefail
+
+cd src
+
+stack build
+
+exe=$(stack exec -- which myxmonad)
+
+echo "Linking $exe to $1"
+ln -f -T $exe $1
