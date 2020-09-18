@@ -35,15 +35,15 @@ myConfig = def
 
 -- Names of the workspaces
 workspaces' =
-   [ "1-home"
-   , "2-mail"
-   , "3-web"
-   , "4-dev"
-   , "5-dev"
-   , "6-misc"
-   , "7-misc"
-   , "8-misc"
-   , "9-music"
+   [ "1:home"
+   , "2:mail"
+   , "3:web"
+   , "4:dev"
+   , "5:dev"
+   , "6:misc"
+   , "7:misc"
+   , "8:misc"
+   , "9:music"
    ]
 
 -- Action when a new window is opened
@@ -68,11 +68,11 @@ handleEventHook'
 toggleStrutsKey XConfig {XMonad.modMask = mMask} = (mMask, xK_b)
 
 myPP = def
-   { ppCurrent = xmobarColor "black" "green" -- . wrap "[" "]"
-   , ppTitle   = xmobarColor "green"  "" . shorten 150
+   { ppCurrent = xmobarColor "black" "#00CC00" -- . wrap "[" "]"
+   , ppTitle   = xmobarColor "lightBlue"  "" . shorten 150
    , ppVisible = xmobarColor "black" "#009900" -- . wrap "(" ")"
    , ppHiddenNoWindows = xmobarColor "gray" ""
-   , ppHidden  = xmobarColor "darkGray" ""
+   , ppHidden  = xmobarColor "brown" ""
    , ppSep     = "  --  "
    }
 
