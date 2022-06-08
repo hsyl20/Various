@@ -18,7 +18,8 @@ import Text.Read (readMaybe)
 import Data.Char
 
 main = do
-  myConfigWithBar <- statusBar "xmobar" myPP toggleStrutsKey myConfig
+  -- "-x 1" = start on screen 1
+  myConfigWithBar <- statusBar "xmobar -x 1" myPP toggleStrutsKey myConfig
   xmonad myConfigWithBar
 
 -- Configuration
@@ -35,22 +36,20 @@ myConfig = def
 
 -- Names of the workspaces
 workspaces' =
-   [ "1:home"
-   , "2:mail"
-   , "3:web"
-   , "4:dev"
-   , "5:dev"
-   , "6:misc"
-   , "7:misc"
-   , "8:misc"
-   , "9:music"
+   [ "1:work"
+   , "2:two"
+   , "3:three"
+   , "4:four"
+   , "5:five"
+   , "6:six"
+   , "7:seven"
+   , "8:notes"
+   , "9:todo"
    ]
 
 -- Action when a new window is opened
 manageHook'= manageDocks <+> composeAll
    [ isFullscreen                      --> doFullFloat
-   , className =? "Firefox"            --> doShift "3-web"
-   , className =? "Thunderbird"        --> doShift "2-mail"
    , className =? "qemu-system-x86_64" --> doCenterFloat
    , className =? "Qemu-system-x86_64" --> doCenterFloat
    ] 
@@ -73,7 +72,7 @@ myPP = def
    , ppVisible = xmobarColor "black" "#009900" -- . wrap "(" ")"
    , ppHiddenNoWindows = xmobarColor "gray" ""
    , ppHidden  = xmobarColor "brown" ""
-   , ppSep     = "  --  "
+   , ppSep     = "  |  "
    }
 
 promptConfig = def
