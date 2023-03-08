@@ -36,15 +36,15 @@ myConfig = def
 
 -- Names of the workspaces
 workspaces' =
-   [ "1:work"
-   , "2:two"
-   , "3:three"
-   , "4:four"
-   , "5:five"
-   , "6:six"
-   , "7:seven"
-   , "8:notes"
-   , "9:todo"
+   [ " 1 "
+   , " 2 "
+   , " 3 "
+   , " 4 "
+   , " 5 "
+   , " 6 "
+   , " 7 "
+   , " 8 "
+   , " 9 "
    ]
 
 -- Action when a new window is opened
@@ -67,11 +67,11 @@ handleEventHook'
 toggleStrutsKey XConfig {XMonad.modMask = mMask} = (mMask, xK_b)
 
 myPP = def
-   { ppCurrent = xmobarColor "black" "#00CC00" -- . wrap "[" "]"
+   { ppCurrent = xmobarColor "black" "#00E000" -- . wrap "[" "]"
    , ppTitle   = xmobarColor "lightBlue"  "" . shorten 150
    , ppVisible = xmobarColor "black" "#009900" -- . wrap "(" ")"
-   , ppHiddenNoWindows = xmobarColor "gray" ""
-   , ppHidden  = xmobarColor "brown" ""
+   , ppHiddenNoWindows = xmobarColor "gray" "#220000"
+   , ppHidden  = xmobarColor "gray" "#444400"
    , ppSep     = "  |  "
    }
 
@@ -85,7 +85,7 @@ promptConfig = def
 -- Aditional key bindings
 keys' x = Map.unions
    [ Map.fromList 
-      [ ((modMask x .|. shiftMask, xK_Return),   spawn "/home/hsyl20/.usr/bin/xterm_pwd")
+      [ ((modMask x .|. shiftMask, xK_Return),   spawn "alacritty")
       , ((modMask x .|. shiftMask, xK_z),        spawn "systemctl hibernate")
       , ((modMask x .|. shiftMask, xK_F12),      spawn "systemctl poweroff")
       --, ((modMask x .|. shiftMask, xK_F12),      xmonadPrompt defaultXPConfig)

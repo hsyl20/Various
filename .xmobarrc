@@ -1,10 +1,11 @@
 Config
-   { template = " %StdinReader% }{ | %coretemp% | %multicpu% | Volume %volume% | %theDate% "
+   { template = " %StdinReader% }{ | %coretemp%  %multicpu% | %theDate% "
    , allDesktops = True
+   , font = "Terminus 12"
    , commands =
       [ Run StdinReader
-      , Run Com "/home/hsyl20/.usr/bin/master_sound_volume" [] "volume" 50
-      , Run Date "%A %d/%m/%y - %H:%M" "theDate" 100
+      -- , Run Com "/home/hsyl20/.usr/bin/master_sound_volume" [] "volume" 50
+      , Run Date "%A  %Y-%m-%d  %H:%M" "theDate" 100
       , Run MultiCpu ["-t", "CPU <total>%", "-L","3","-H","50","--normal","green","--high","red"] 100
       , Run CoreTemp [ "-t", "<core0>-<core1>-<core2>-<core3> °C"
                      , "-L", "40", "-H", "60"
