@@ -68,7 +68,7 @@ toggleStrutsKey XConfig {XMonad.modMask = mMask} = (mMask, xK_b)
 
 myPP = def
    { ppCurrent = xmobarColor "black" "#00E000" -- . wrap "[" "]"
-   , ppTitle   = xmobarColor "lightBlue"  "" . shorten 150
+   , ppTitle   = xmobarColor "lightBlue"  "" . shorten 120 -- max title length (otherwise other fields on the right are truncated)
    , ppVisible = xmobarColor "black" "#009900" -- . wrap "(" ")"
    , ppHiddenNoWindows = xmobarColor "gray" "#220000"
    , ppHidden  = xmobarColor "gray" "#444400"
